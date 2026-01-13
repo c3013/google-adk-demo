@@ -92,6 +92,20 @@ class OpenSourceModelDemo:
         
         result = response.json()
         
+        # Check if response contains an error
+        if 'error' in result:
+            error_msg = result['error']
+            if isinstance(error_msg, dict):
+                error_msg = error_msg.get('message', str(error_msg))
+            raise RuntimeError(f"API error: {error_msg}")
+        
+        # Check for error_code and message fields (some APIs use this format)
+        if 'error_code' in result or 'message' in result:
+            error_code = result.get('error_code', 'unknown')
+            error_message = result.get('message', 'No error message provided')
+            raise RuntimeError(f"API error (code: {error_code}): {error_message}")
+        
+        # Check for successful response
         if 'choices' in result and len(result['choices']) > 0:
             return result['choices'][0]['message']['content']
         else:
