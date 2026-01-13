@@ -1,0 +1,23 @@
+# config.yaml - Configuration file for Google ADK Demo
+# You can use this as an alternative to .env file
+
+api_key: "your_api_key_here"
+base_url: "https://api.example.com/v1"
+model: "gpt-3.5-turbo"
+
+# Example configurations for different providers:
+
+# OpenAI Compatible API:
+# api_key: "sk-xxxxxxxxxxxxxxxx"
+# base_url: "https://api.openai.com/v1"
+# model: "gpt-3.5-turbo"
+
+# Local LLM (e.g., Ollama, LM Studio):
+# api_key: "dummy_key"
+# base_url: "http://localhost:11434/v1"
+# model: "llama2"
+
+# Hugging Face Inference API:
+# api_key: "hf_xxxxxxxxxxxxxxxx"
+# base_url: "https://api-inference.huggingface.co/models"
+# model: "mistralai/Mistral-7B-Instruct-v0.1"
