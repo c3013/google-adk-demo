@@ -2,11 +2,20 @@
 """
 Simple example of using Google ADK with open-source models
 This is a minimal example to get started quickly
+
+Note: This example uses the google-genai SDK. For custom endpoints
+(open-source models, Ollama, etc.), use the full demo.py script.
 """
 
-from google import genai
-from google.genai import types
 import os
+
+try:
+    from google import genai
+    from google.genai import types
+except ImportError:
+    print("Error: google-genai not installed")
+    print("Install it with: pip install google-genai")
+    exit(1)
 
 def simple_example():
     """

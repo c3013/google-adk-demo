@@ -10,6 +10,16 @@ This project demonstrates how to use Google's ADK (Application Development Kit) 
 - ✅ Interactive chat session
 - ✅ Example demonstrations (text generation, code generation, Q&A)
 - ✅ Compatible with OpenAI-compatible APIs and open-source models
+- ✅ Dual mode: Google SDK for Google models, HTTP mode for custom endpoints
+
+## How It Works
+
+The demo intelligently selects the best method to communicate with your chosen model:
+
+- **Google SDK Mode**: When connecting to Google's Generative AI API, it uses the official Google SDK
+- **HTTP Mode**: For custom endpoints (OpenAI, Ollama, LM Studio, etc.), it uses direct HTTP calls compatible with the OpenAI API format
+
+This hybrid approach ensures maximum compatibility with any API endpoint!
 
 ## Installation
 
