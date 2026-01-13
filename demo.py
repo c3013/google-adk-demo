@@ -140,7 +140,7 @@ class OpenSourceModelDemo:
             print(f"{'='*60}")
             
             # Generate content using the appropriate method
-            if self.use_google_sdk and self.client:
+            if self.use_google_sdk:
                 result = self._generate_with_google_sdk(prompt, max_tokens)
             else:
                 result = self._generate_with_http(prompt, max_tokens)
@@ -178,7 +178,7 @@ class OpenSourceModelDemo:
                     continue
                 
                 # Generate response using the appropriate method
-                if self.use_google_sdk and self.client:
+                if self.use_google_sdk:
                     response = self.client.models.generate_content(
                         model=self.model,
                         contents=user_input,
