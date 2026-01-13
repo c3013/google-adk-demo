@@ -19,13 +19,14 @@ import requests
 from typing import Optional, Dict, Any
 from dotenv import load_dotenv
 
+# Try to import Google SDK (optional)
+HAS_GOOGLE_SDK = False
 try:
     from google import genai
     from google.genai import types
     HAS_GOOGLE_SDK = True
 except ImportError:
-    HAS_GOOGLE_SDK = False
-    print("Note: google-genai not installed. Using HTTP mode for all requests.")
+    pass  # Will use HTTP mode for all requests
 
 
 class OpenSourceModelDemo:
@@ -83,14 +84,18 @@ class OpenSourceModelDemo:
             "temperature": 0.7
         }
         
-        response = requests.post(url, headers=headers, json=data, timeout=60)
-        response.raise_for_status()
+        try:
+            response = requests.post(url, headers=headers, json=data, timeout=60)
+            response.raise_for_status()
+        except requests.exceptions.RequestException as e:
+            raise RuntimeError(f"HTTP request failed to {url}: {str(e)}")
+        
         result = response.json()
         
         if 'choices' in result and len(result['choices']) > 0:
             return result['choices'][0]['message']['content']
         else:
-            raise Exception(f"Unexpected response format: {result}")
+            raise ValueError(f"Unexpected API response format. Expected 'choices' field but got: {list(result.keys())}")
     
     def _generate_with_google_sdk(self, prompt: str, max_tokens: int) -> Optional[str]:
         """Generate text using Google SDK"""

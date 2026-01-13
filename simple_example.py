@@ -8,6 +8,7 @@ Note: This example uses the google-genai SDK. For custom endpoints
 """
 
 import os
+import sys
 
 try:
     from google import genai
@@ -15,19 +16,20 @@ try:
 except ImportError:
     print("Error: google-genai not installed")
     print("Install it with: pip install google-genai")
-    exit(1)
+    sys.exit(1)
 
 def simple_example():
     """
     Simple example showing basic usage
     """
-    # Configuration
-    api_key = "your_api_key_here"  # Replace with your actual API key
-    model = "gemini-2.0-flash-exp"  # Replace with your model name
+    # Configuration - preferably use environment variables
+    api_key = os.getenv('API_KEY', 'your_api_key_here')  # Get from env or use placeholder
+    model = os.getenv('MODEL', 'gemini-2.0-flash-exp')  # Get from env or use default
     
-    # You can also get from environment variables
-    # api_key = os.getenv('API_KEY')
-    # model = os.getenv('MODEL', 'gemini-2.0-flash-exp')
+    if api_key == 'your_api_key_here':
+        print("Warning: Using placeholder API key. Set API_KEY environment variable.")
+        print("Example: export API_KEY=your_actual_key")
+        print()
     
     # Initialize client
     client = genai.Client(api_key=api_key)
